@@ -17,16 +17,13 @@ function App() {
         </a>
       </div>
       <h1>Ksenija Rubez</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      
         <p>
-          Ksenija Rubez is a cybersecurity student at Grand Valley State University. 
+          Ksenija Rubez is-a cybersecurity student at Grand Valley State University. 
           In her free time she enjoys reading books, playing chess or video-games, and
           writing. 
         </p>
-      </div>
+      
       <p className="read-the-docs">
       </p>
     </>
