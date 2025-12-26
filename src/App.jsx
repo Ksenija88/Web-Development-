@@ -1,33 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import {Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Ksenija Rubez</h1>
-      
-        <p>
-          Ksenija Rubez is-a cybersecurity student at Grand Valley State University. 
-          In her free time she enjoys reading books, playing chess or video-games, and
-          writing. 
-        </p>
-      
-      <p className="read-the-docs">
-      </p>
-    </>
-  )
+    <div className="relative min-h-screen bg-gradient-to-br 
+    from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
 }
 
-export default App
+export default App;
