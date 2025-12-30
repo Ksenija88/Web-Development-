@@ -12,22 +12,26 @@ import Contact from "./Contact.jsx";
 import Login from "./Login.jsx";
 import Admin from "./Admin.jsx";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "about", element: <About /> },
+        { path: "projects", element: <Projects /> },
+        { path: "contact", element: <Contact /> },
+        { path: "login", element: <Login /> },
+        { path: "admin", element: <Admin /> },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
-      { path: "projects", element: <Projects /> },
-      { path: "contact", element: <Contact />},
-      { path: "login", element: <Login />},
-      { path: "admin", element: <Admin />},	
+    basename: "/Web-Development-/",
+  }
+);
 
-
-    ],
-  },
-]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
