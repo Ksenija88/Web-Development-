@@ -19,6 +19,9 @@ export default function Navbar() {
     return () => unsub();
   }, []);
 
+  const ADMIN_UID = "e2BUECsHodU0EfMk9XLoZK79lAr1";
+  const isAdmin = user?.uid === ADMIN_UID; 
+
   const linkClasses = ({ isActive }) =>
     isActive
       ? "text-white font-semibold"
@@ -29,58 +32,55 @@ export default function Navbar() {
   }
 
   return (
-    <NavigationMenu className="w-full p-6 bg-white/10 backdrop-blur-md border-b border-white/20">
-      <NavigationMenuList className="w-full flex justify-center gap-8 bg-transparent">
+
+  <NavigationMenu className="w-full p-6 bg-white/10 backdrop-blur-md border-b border-white/20">
+  <NavigationMenuList className="w-full flex justify-center gap-8 bg-transparent">
+    <NavigationMenuItem>
+      <NavLink to="/" end className={linkClasses}>
+        Home
+      </NavLink>
+    </NavigationMenuItem>
+
+    <NavigationMenuItem>
+      <NavLink to="/about" className={linkClasses}>
+        About Me
+      </NavLink>
+    </NavigationMenuItem>
+
+    <NavigationMenuItem>
+      <NavLink to="/projects" className={linkClasses}>
+        Projects
+      </NavLink>
+    </NavigationMenuItem>
+
+    <NavigationMenuItem>
+      <NavLink to="/contact" className={linkClasses}>
+        Contact
+      </NavLink>
+    </NavigationMenuItem>
+
+    {/* Admin-only links */}
+    {isAdmin && (
+      <>
         <NavigationMenuItem>
-          <NavLink to="/" end className={linkClasses}>
-            Home
+          <NavLink to="/admin" className={linkClasses}>
+            Admin
           </NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink to="/about" className={linkClasses}>
-            About Me
-          </NavLink>
+          <button
+            onClick={handleLogout}
+            className="text-slate-300 hover:text-white transition-colors"
+            type="button"
+          >
+            Logout
+          </button>
         </NavigationMenuItem>
+      </>
+    )}
+  </NavigationMenuList>
+</NavigationMenu>
 
-        <NavigationMenuItem>
-          <NavLink to="/projects" className={linkClasses}>
-            Projects
-          </NavLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavLink to="/contact" className={linkClasses}>
-            Contact
-          </NavLink>
-        </NavigationMenuItem>
-
-        {user ? (
-          <>
-            <NavigationMenuItem>
-              <NavLink to="/admin" className={linkClasses}>
-                Admin
-              </NavLink>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <button
-                onClick={handleLogout}
-                className="text-slate-300 hover:text-white transition-colors"
-                type="button"
-              >
-                Logout
-              </button>
-            </NavigationMenuItem>
-          </>
-        ) : (
-          <NavigationMenuItem>
-            <NavLink to="/login" className={linkClasses}>
-              Login
-            </NavLink>
-          </NavigationMenuItem>
-        )}
-      </NavigationMenuList>
-    </NavigationMenu>
   );
 }

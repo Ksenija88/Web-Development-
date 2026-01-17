@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { auth, db } from "./firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
+  const ADMIN_UID = "e2BUECsHodU0EfMk9XLoZK79lAr1";
+  const isAdmin = user?.uid === ADMIN_UID;
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (currentUser) => {
@@ -29,7 +34,12 @@ export default function Admin() {
   }, []);
 
   if (loading) return <div className="p-6 text-white">Loading…</div>;
-  if (!user) return <div className="p-6 text-white">Access denied.</div>;
+  if (!user || !isAdmin) {
+  navigate("/"); // takes me back to home when i log out 
+  return null; // stop rendering
+}
+
+
 
   return (
     <div className="p-6 text-white max-w-4xl mx-auto">
